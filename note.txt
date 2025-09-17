@@ -1,0 +1,100 @@
+<Link 
+    href="/about"> 
+    About 
+</Link>
+
+<Link 
+    href={
+        { 
+            pathname: '/blog', 
+            query{category: 'news', 
+            id: '123'} 
+        }
+    }>
+    News 
+</Link>
+
+<Link 
+    href={ '/posts/${postsId}'}> 
+    Post
+</Link>
+
+<Link 
+    href="/about#team"> 
+    Team Section 
+</Link>
+
+<Link 
+    href="/new-page" 
+    replace> 
+    Reapalce route 
+</Link>
+
+// Basic usage (Google Analytics)
+<Script 
+    src="https://www.googletagmanager.com/gtag/js?id=GA_MEASUREMENT_ID" strategy="afterInteractive" /> // Inline scripts
+
+<Script id="show-banner">
+    {
+        `document.getElementById('banner').classList.remove('hidden')`
+    }
+</Script>
+
+// Load strategies
+<Script src="/heavy-script.js" strategy="lazyOnload"/>              // carica dopo tutto il resto 
+
+<Script src="/important-script.js" strategy="beforeInteractive"/>;  // carica prima dell 'interattività
+
+// Con eventi
+<Script 
+    src="/analytics.js"
+    onLoad={() => console.log('Script loaded ')}
+    onError={(e) => console.error('Script failed to load ', e)}
+/>;
+
+<Link
+    href="/page"    // string | url object
+    replace={false} // replace invece di push nella history
+    scroll={true}   // controllo scroll automatico
+    prefetch={true} // controllo prefetch
+    shallow={false} // navigazione shallow senza ricaricare dati
+    locale="en"     // per multi-lenguage
+/>
+
+// next.config.js
+module.exports = {
+    images: {
+        // accetta i domini della src
+        domains: ['example.com'],       // domini permessi
+        remotePatterns: [               // pattern più precisi
+            {
+                protocol: 'https',
+                hostname: '**.example.com',
+                port: '',
+                pathname: '/images/**',
+            },
+        ],
+        // ottimizzazioni dell'immagini
+        deviceSize: [640, 750, 828, 1080, 1200],    //breakpoint responsive
+        imageSize: [16, 32, 48, 64, 96],            // dimansioni generate
+        formats: ['image/webp'],                    // formati supportati
+    }
+}
+
+// Component props
+<Image
+    quality={75}                            // qualità (1-100)
+    priority={false}                        // priorità caricamento
+    loading="lazy"                          // eager (risparmio di traffivo) | lazy (immediato)
+    sizes="(max-width: 768px) 100vw, 50vw"  
+    onLoad={() => {}}                       // callback caricamento
+    onError={() => {}}                      // callback errore
+/>
+
+<Script
+    strategys="afterInteractive"    // beforeInteractive | afterInteractive | lazyOnload | worker
+    nonce="random123"               // per CSP
+    onReady={() => {}}              // quando è pronto
+    onLoad={() => {}}               // quando è caricato
+    onErro={() => {}}               // quando è in errore
+/>
